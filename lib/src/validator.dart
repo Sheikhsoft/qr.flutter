@@ -19,9 +19,11 @@ class QrValidator {
     int errorCorrectionLevel = QrErrorCorrectLevel.L,
   }) {
     late final QrCode qrCode;
+    
     try {
       if (version != QrVersions.auto) {
         qrCode = QrCode(version, errorCorrectionLevel);
+        
         qrCode.addData(data);
       } else {
         qrCode = QrCode.fromData(
@@ -29,7 +31,8 @@ class QrValidator {
           errorCorrectLevel: errorCorrectionLevel,
         );
       }
-      qrCode.make();
+
+     
       return QrValidationResult(
           status: QrValidationStatus.valid, qrCode: qrCode);
     } on InputTooLongException catch (itle) {
